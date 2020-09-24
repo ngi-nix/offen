@@ -2,21 +2,40 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1600943399,
-        "narHash": "sha256-zWgTL3/+6fwhHBeXHsWC/So+wkotojwxOX3yEbw5zpo=",
+        "lastModified": 1600419171,
+        "narHash": "sha256-IN9fAah/ZMA1klQO3NLyff5XOaft4OwKKMEXvuO27AA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7e4b7ecd00e76d3f12c511e593d0189246b6323d",
+        "rev": "be92e21e2519143f8c6ea70fa8052deff5126ce5",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "NixOS",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "offen-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1600540603,
+        "narHash": "sha256-DA+1Sh+piWrhu8oDvm85p159LmvAzJFSvU1pfCg0Pts=",
+        "owner": "offen",
+        "repo": "offen",
+        "rev": "70388c771089b7e588a6d9c2024a9a39faecfd37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "offen",
+        "repo": "offen",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "offen-src": "offen-src"
       }
     }
   },
