@@ -37,11 +37,9 @@
       overlay = final: prev:
         with final;
         {
-          offen = buildGoModule {
-            pname = "offen";
-            inherit version;
+          offen = callPackage ./pkgs/offen-server {} {
             src = "${offen-src}/server";
-            vendorSha256 = "0phki0cvagd32rsz0pwbgpdgf7vblj515hw20r62g3mfq2qrwlm4";
+            inherit version;
           };
         };
 
