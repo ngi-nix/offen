@@ -19,11 +19,11 @@
     "offen-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1600540603,
-        "narHash": "sha256-DA+1Sh+piWrhu8oDvm85p159LmvAzJFSvU1pfCg0Pts=",
+        "lastModified": 1606933057,
+        "narHash": "sha256-GTQDqdUlwvPBPNk/K75KpjzuQf6/Txq2VBUdgUpatPw=",
         "owner": "offen",
         "repo": "offen",
-        "rev": "70388c771089b7e588a6d9c2024a9a39faecfd37",
+        "rev": "1f1e5d0c9550e2ccbf35a8a9af2480cdba9da800",
         "type": "github"
       },
       "original": {

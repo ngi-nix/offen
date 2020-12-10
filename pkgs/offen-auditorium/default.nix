@@ -1,5 +1,5 @@
 { python2, fetchurl, fetchgit, utillinux, runCommand, writeTextFile, stdenv, nodePackages, nodejs, callPackage, offen-packages }@pkgs:
-{ src, version }:
+{ offenSrc, version }:
 
 let
   nodePackagesRaw = import ./app {
@@ -17,38 +17,33 @@ let
     }
   );
 
-in
-(builtins.trace nodePackages nodePackages).package.override {
-  inherit src;
+  nodeDependencies = (nodePackages.shell.override {
+    src = "${offenSrc}/auditorium";
 
-  postInstall = ''
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "yes";
+  }).nodeDependencies;
+
+in
+
+stdenv.mkDerivation {
+  name = "offen-auditorium-source";
+  src = "${offenSrc}/auditorium";
+  inherit version;
+
+  buildInputs = [ nodejs ];
+
+  buildPhase = ''
+    ln -s ${nodeDependencies}/lib/node_modules ./node_modules
+    export PATH="${nodeDependencies}/bin:$PATH"
+
+    ln -s ${offenSrc}/banner.txt .
+    ln -s ${offenSrc}/locales .
+    substituteInPlace gulpfile.js --replace ../banner.txt banner.txt
+
     npm run build
   '';
 
-  # meta = with lib; {
-  #   description = "Offen auditorium";
-  #   license = licenses.mit;
-  # };
+  installPhase = ''
+    cp -r dist $out
+  '';
 }
-
-# stdenv.mkDerivation {
-#   name = "offen-auditorium-source";
-#   inherit src version;
-
-#   buildInputs = [ nodejs ];
-
-#   buildPhase = ''
-#     echo ${nodeDependencies}
-#     # ln -s ${nodeDependencies}/lib/node_modules ./node_modules
-#     # export PATH="${nodeDependencies}/bin:$PATH"
-
-#     # echo $PATH
-#     # ls -l ./node_modules
-
-#   '';
-
-#   installPhase = ''
-#     # mkdir -p $out/
-#     # cp -r package $out/
-#   '';
-# }

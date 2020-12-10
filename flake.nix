@@ -43,7 +43,7 @@
           };
 
           offen-auditorium = callPackage ./pkgs/offen-auditorium {} {
-            src = "${offen-src}/auditorium";
+            offenSrc = offen-src;
             inherit version;
           };
 
