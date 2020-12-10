@@ -41,10 +41,16 @@
             src = "${offen-src}/server";
             inherit version;
           };
+
+          offen-auditorium = callPackage ./pkgs/offen-auditorium {} {
+            src = "${offen-src}/auditorium";
+            inherit version;
+          };
         };
 
       packages = forAllSystems (system: {
         offen = nixpkgsFor.${system}.offen;
+        offen-auditorium = nixpkgsFor.${system}.offen-auditorium;
       });
 
       defaultPackage = forAllSystems (system: self.packages.${system}.offen);
