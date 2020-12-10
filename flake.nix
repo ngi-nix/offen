@@ -36,7 +36,7 @@
     {
       overlay = final: prev:
         with final;
-        {
+        rec {
           offen = callPackage ./pkgs/offen-server {} {
             src = "${offen-src}/server";
             inherit version;
