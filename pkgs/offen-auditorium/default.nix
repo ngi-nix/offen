@@ -11,7 +11,7 @@ let
     {
       sources = old.sources // {
         "offen-../packages" = old.sources."offen-../packages" // {
-          src = "${offen-packages}/package";
+          src = "${offenSrc}/packages";
         };
       };
     }
@@ -26,7 +26,7 @@ let
 in
 
 stdenv.mkDerivation {
-  name = "offen-auditorium-source";
+  name = "offen-auditorium";
   src = "${offenSrc}/auditorium";
   inherit version;
 

@@ -46,17 +46,11 @@
             offenSrc = offen-src;
             inherit version;
           };
-
-          offen-packages = callPackage ./pkgs/offen-packages {} {
-            src = "${offen-src}/packages";
-            inherit version;
-          };
         };
 
       packages = forAllSystems (system: {
         offen = nixpkgsFor.${system}.offen;
         offen-auditorium = nixpkgsFor.${system}.offen-auditorium;
-        offen-packages = nixpkgsFor.${system}.offen-packages;
       });
 
       defaultPackage = forAllSystems (system: self.packages.${system}.offen);

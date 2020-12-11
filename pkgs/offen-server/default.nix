@@ -4,5 +4,5 @@
 buildGoModule {
   pname = "offen";
   inherit src version;
-  vendorSha256 = "0phki0cvagd32rsz0pwbgpdgf7vblj515hw20r62g3mfq2qrwlm4";
+  vendorSha256 = "1gwbdh521052payig85n0mmcgj3lvm69ym77gkzhj4wabqvfscsp";
 }
