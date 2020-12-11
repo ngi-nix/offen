@@ -34,24 +34,22 @@
     in
 
     {
-      overlay = final: prev:
-        with final;
-        rec {
-          offen = callPackage ./pkgs/offen-server {} {
-            src = "${offen-src}/server";
-            inherit version;
-          };
-
-          offen-auditorium = callPackage ./pkgs/offen-auditorium {} {
-            offenSrc = offen-src;
-            inherit version;
-          };
-
-          offen-vault = callPackage ./pkgs/offen-vault {} {
-            offenSrc = offen-src;
-            inherit version;
-          };
+      overlay = final: prev: with final; rec {
+        offen = callPackage ./pkgs/offen-server {} {
+          src = "${offen-src}/server";
+          inherit version;
         };
+
+        offen-auditorium = callPackage ./pkgs/offen-auditorium {} {
+          offenSrc = offen-src;
+          inherit version;
+        };
+
+        offen-vault = callPackage ./pkgs/offen-vault {} {
+          offenSrc = offen-src;
+          inherit version;
+        };
+      };
 
       packages = forAllSystems (system: {
         offen = nixpkgsFor.${system}.offen;
