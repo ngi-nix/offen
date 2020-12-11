@@ -1,8 +1,8 @@
-{ python2, fetchurl, fetchgit, utillinux, runCommand, writeTextFile, stdenv, nodePackages, nodejs, callPackage, offen-packages }@pkgs:
+{ python2, fetchurl, fetchgit, utillinux, runCommand, writeTextFile, stdenv, nodePackages, nodejs, callPackage }@pkgs:
 { offenSrc, version }:
 
 let
-  nodePackagesRaw = import ./app {
+  nodePackagesRaw = import ./composition.nix {
     inherit pkgs nodejs;
     inherit (stdenv.hostPlatform) system;
   };
