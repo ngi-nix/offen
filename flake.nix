@@ -58,5 +58,20 @@
       });
 
       defaultPackage = forAllSystems (system: self.packages.${system}.offen);
+
+      nixosModules.offen =
+        { pkgs, ... }:
+        {
+          nixpkgs.overlays = [ self.overlay ];
+
+          systemd.services = {
+            nginx.enable = true;
+          };
+        };
+
+      checks = forAllSystems (system:
+        self.packages.${system}
+          // import ./checks/offen.nix { inherit self nixpkgs system; }
+      );
     };
 }
