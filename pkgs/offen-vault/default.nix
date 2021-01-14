@@ -33,6 +33,10 @@ stdenv.mkDerivation {
   buildInputs = [ nodejs ];
 
   buildPhase = ''
+    ADBLOCK=true
+    DISABLE_OPENCOLLECTIVE=true
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
     export PATH="${nodeDependencies}/bin:$PATH"
 
@@ -41,9 +45,13 @@ stdenv.mkDerivation {
     substituteInPlace gulpfile.js --replace ../banner.txt banner.txt
 
     npm run build
+    npm run licenses
   '';
 
   installPhase = ''
-    cp -r dist $out
+    mkdir -p $out/vault/
+    cp dist/en/vault/index-*.js $out/vault/index.js
+    cp dist/en/vault/vendor-*.js $out/vault/vendor.js
+    cp dependencies.csv $out/
   '';
 }

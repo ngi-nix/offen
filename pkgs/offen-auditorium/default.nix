@@ -33,6 +33,10 @@ stdenv.mkDerivation {
   buildInputs = [ nodejs ];
 
   buildPhase = ''
+    ADBLOCK=true
+    DISABLE_OPENCOLLECTIVE=true
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
     ln -s ${nodeDependencies}/lib/node_modules ./node_modules
     export PATH="${nodeDependencies}/bin:$PATH"
 
@@ -40,10 +44,15 @@ stdenv.mkDerivation {
     ln -s ${offenSrc}/locales .
     substituteInPlace gulpfile.js --replace ../banner.txt banner.txt
 
+    NODE_ENV=production
     npm run build
+    npm run licenses
   '';
 
   installPhase = ''
-    cp -r dist $out
+    mkdir -p $out/auditorium/
+    cp dist/en/auditorium/index-*.js $out/auditorium/index.js
+    cp dist/en/auditorium/vendor-*.js $out/auditorium/vendor.js
+    cp dependencies.csv $out/
   '';
 }
