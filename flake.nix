@@ -59,15 +59,7 @@
 
       defaultPackage = forAllSystems (system: self.packages.${system}.offen);
 
-      nixosModules.offen =
-        { pkgs, ... }:
-        {
-          nixpkgs.overlays = [ self.overlay ];
-
-          systemd.services = {
-            nginx.enable = true;
-          };
-        };
+      nixosModules.offen = import modules/offen.nix;
 
       checks = forAllSystems (system:
         self.packages.${system}
