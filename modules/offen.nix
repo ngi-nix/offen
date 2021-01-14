@@ -50,7 +50,7 @@ in
           "OFFEN_DATABASE_CONNECTIONSTRING=/var/lib/offen/db.sqlite"
         ];
 
-        ExecStart = "${pkgs.offen}/bin/offen demo";
+        ExecStart = "${pkgs.offen}/bin/offen";
       };
     };
 
