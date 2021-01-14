@@ -45,12 +45,12 @@ in
         StateDirectory = "offen";
 
         Environment = [
-          "OFFEN_SERVER_PORT=${cfg.port}"
-          "OFFEN_DATABASE_DIALECT=sqlite"
+          "OFFEN_SERVER_PORT=${toString cfg.port}"
+          "OFFEN_DATABASE_DIALECT=sqlite3"
           "OFFEN_DATABASE_CONNECTIONSTRING=/var/lib/offen/db.sqlite"
         ];
 
-        ExecStart = "${pkgs.offen-server}/bin/offen demo";
+        ExecStart = "${pkgs.offen}/bin/offen demo";
       };
     };
 
