@@ -73,5 +73,16 @@
         self.packages.${system}
           // import ./checks/offen.nix { inherit self nixpkgs system; }
       );
+
+      devShell = forAllSystems (system:
+        with nixpkgsFor.${system};
+        mkShell {
+          buildInputs = [
+            git
+            nixFlakes
+            nodePackages.node2nix
+          ];
+        }
+      );
     };
 }
