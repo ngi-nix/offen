@@ -23,9 +23,8 @@ function createNixFiles {
         --no-copy-node-env \
         --output node-packages.nix \
         --composition composition.nix
-
-    cp composition.nix $OUTPUT_DIR/pkgs/offen-$package
-    cp node-packages.nix $OUTPUT_DIR/pkgs/offen-$package
+    mkdir -p $OUTPUT_DIR/pkgs/offen-$package/
+    cp node-packages.nix $OUTPUT_DIR/pkgs/offen-$package/
     popd
 }
 
@@ -36,6 +35,7 @@ git checkout $REVISION
 
 createNixFiles "auditorium"
 createNixFiles "vault"
+createNixFiles "script"
 
 popd
 

@@ -45,17 +45,25 @@
           inherit version;
         };
 
+        offen-script = callPackage ./pkgs/offen-script {} {
+          offenSrc = offen-src;
+          inherit version;
+        };
+
         offen-vault = callPackage ./pkgs/offen-vault {} {
           offenSrc = offen-src;
           inherit version;
         };
       };
 
-      packages = forAllSystems (system: {
-        offen = nixpkgsFor.${system}.offen;
-        offen-auditorium = nixpkgsFor.${system}.offen-auditorium;
-        offen-vault = nixpkgsFor.${system}.offen-vault;
-      });
+      packages = forAllSystems (system:
+        let
+          pkgs = nixpkgsFor.${system};
+
+        in {
+          inherit (pkgs) offen offen-auditorium offen-script offen-vault;
+        }
+      );
 
       defaultPackage = forAllSystems (system: self.packages.${system}.offen);
 
