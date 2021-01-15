@@ -23,7 +23,7 @@ nix run github:ngi-nix/offen demo
 
 If you want to use Offen on a NixOS server, you can use the module provided by
 the flake. Provided you have added the flake as an input called `offen`, you can
-add this configuration:
+merge this code into your configuration:
 
 ```nix
 {
