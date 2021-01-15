@@ -4,7 +4,9 @@
 let
   wrappedSrc = runCommand "offen-server-wrapped-src" {} ''
     mkdir -p $out
-    cp -r ${src}/* $out/
+    cp -r ${src}/server/* $out/
+    chmod -R +w $out/public
+    cp -r ${src}/locales/* $out/public/
     chmod -R +w $out/public
     cp -r ${offen-auditorium}/dist/* $out/public/
     chmod -R +w $out/public
@@ -24,7 +26,6 @@ buildGoModule {
   doCheck = false;
 
   preBuild = ''
-    statik -dest public -src public
-    statik -dest locales -src locales
+    statik -src public
   '';
 }
