@@ -38,8 +38,8 @@ Have a look at `modules/offen.nix` for a documentation of available settings.
 
 # Development & maintenance
 
-Use the devShell provided with the flake for a development environment that
-contains packages required to build and work on the flake:
+Use the shell definition in the flake to get a development environment that
+contains all packages required to build and work on the flake:
 
     nix-shell
 
