@@ -22,14 +22,6 @@ in
         Port for Offen to listen on
       '';
     };
-
-    # flags = mkOption {
-    #   type = with types; attrsOf (nullOr (oneOf [ bool int float str path ]));
-    #   default = { };
-    #   description = ''
-    #     Command line options to pass to offen
-    #   '';
-    # };
   };
 
   config = mkIf cfg.enable {
