@@ -29,7 +29,7 @@
         client.require_unit_state("offen.service", "active")
 
         # Check presence of sqlite database
-        client.wait_for_file("/var/lib/offen/db.sqlite")
+        client.wait_for_file("/var/lib/offen/offen.db")
 
         # Test HTTP responses
         client.wait_for_open_port(8080)

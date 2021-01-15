@@ -11,15 +11,34 @@ in
       type = types.bool;
       default = false;
       description = ''
-        Whether to enable the Offen web analytics tool
+        Enable the Offen web analytics tool
       '';
     };
 
     port = mkOption {
-      type = types.int;
+      type = types.port;
       default = 8080;
       description = ''
-        Port for Offen to listen on
+        HTTP port for Offen to listen on
+      '';
+    };
+
+    extraEnvVars = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = ''
+        Extra environment variables to configure Offen. Provide a list of
+        strings, each containing the definition of an environment variable.
+
+        For example to connect Offen to a local Postgres database:
+
+          [
+            "OFFEN_DATABASE_DIALECT=postgres"
+            "OFFEN_DATABASE_CONNECTIONSTRING=postgres://user:pass@localhost:5432/offen"
+          ]
+
+        For a reference of available settings, see
+        https://docs.offen.dev/running-offen/configuring-the-application/
       '';
     };
   };
@@ -39,8 +58,8 @@ in
         Environment = [
           "OFFEN_SERVER_PORT=${toString cfg.port}"
           "OFFEN_DATABASE_DIALECT=sqlite3"
-          "OFFEN_DATABASE_CONNECTIONSTRING=/var/lib/offen/db.sqlite"
-        ];
+          "OFFEN_DATABASE_CONNECTIONSTRING=/var/lib/offen/offen.db"
+        ] ++ cfg.extraEnvVars;
 
         ExecStart = "${pkgs.offen}/bin/offen";
       };
