@@ -26,9 +26,11 @@ the flake. Provided you have added the flake as an input called `offen`, you can
 add this configuration:
 
 ```nix
-imports = [ offen.nixosModules.offen ];
-nixpkgs.overlays = [ offen.overlay ];
-services.offen.enable = true;
+{
+    imports = [ offen.nixosModules.offen ];
+    nixpkgs.overlays = [ offen.overlay ];
+    services.offen.enable = true;
+}
 ```
 
 Have a look at `modules/offen.nix` for a documentation of available settings.
