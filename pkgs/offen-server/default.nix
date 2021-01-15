@@ -1,8 +1,30 @@
-{ buildGoModule }:
+{ runCommand, buildGoModule, offen-auditorium, offen-vault, statik }:
 { src, version }:
+
+let
+  wrappedSrc = runCommand "offen-server-wrapped-src" {} ''
+    mkdir -p $out
+    cp -r ${src}/* $out/
+    chmod -R +w $out/public
+    cp -r ${offen-auditorium}/dist/* $out/public/
+    chmod -R +w $out/public
+    cp -r ${offen-vault}/dist/* $out/public/
+  '';
+
+in
 
 buildGoModule {
   pname = "offen";
-  inherit src version;
+  src = wrappedSrc;
+  inherit version;
   vendorSha256 = "1gwbdh521052payig85n0mmcgj3lvm69ym77gkzhj4wabqvfscsp";
+
+  nativeBuildInputs = [ statik ];
+
+  doCheck = false;
+
+  preBuild = ''
+    statik -dest public -src public
+    statik -dest locales -src locales
+  '';
 }

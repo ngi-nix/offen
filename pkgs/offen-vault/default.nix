@@ -49,9 +49,8 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    mkdir -p $out/vault/
-    cp dist/en/vault/index-*.js $out/vault/index.js
-    cp dist/en/vault/vendor-*.js $out/vault/vendor.js
+    mkdir -p $out/
+    cp -r dist $out/dist
     cp dependencies.csv $out/
   '';
 }

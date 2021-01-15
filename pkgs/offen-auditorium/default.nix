@@ -50,9 +50,8 @@ stdenv.mkDerivation {
   '';
 
   installPhase = ''
-    mkdir -p $out/auditorium/
-    cp dist/en/auditorium/index-*.js $out/auditorium/index.js
-    cp dist/en/auditorium/vendor-*.js $out/auditorium/vendor.js
+    mkdir -p $out/
+    cp -r dist $out/dist
     cp dependencies.csv $out/
   '';
 }
