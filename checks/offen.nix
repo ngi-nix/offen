@@ -23,7 +23,14 @@
         start_all()
 
         client.wait_for_unit("offen.service")
+
+        # Make sure the service has not crashed immediately
+        client.sleep(1)
+        client.require_unit_state("offen.service", "active")
+
+        # Test HTTP responses
         client.wait_for_open_port(8080)
+        client.succeed("curl http://localhost:8080")
 
         client.shutdown()
       '';
