@@ -36,6 +36,7 @@ git checkout $REVISION
 createNixFiles "auditorium"
 createNixFiles "vault"
 createNixFiles "script"
+createNixFiles "packages"
 
 popd
 

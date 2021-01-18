@@ -50,6 +50,11 @@
           inherit version;
         };
 
+        offen-packages = callPackage ./pkgs/offen-packages {} {
+          offenSrc = offen-src;
+          inherit version;
+        };
+
         offen-vault = callPackage ./pkgs/offen-vault {} {
           offenSrc = offen-src;
           inherit version;
@@ -61,7 +66,7 @@
           pkgs = nixpkgsFor.${system};
 
         in {
-          inherit (pkgs) offen offen-auditorium offen-script offen-vault;
+          inherit (pkgs) offen offen-auditorium offen-packages offen-script offen-vault;
         }
       );
 
