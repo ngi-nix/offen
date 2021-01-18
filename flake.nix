@@ -35,6 +35,8 @@
 
     {
       overlay = final: prev: with final; rec {
+        license_finder = callPackage ./pkgs/license_finder {};
+
         offen = callPackage ./pkgs/offen-server {} {
           src = offen-src;
           inherit version;
@@ -66,7 +68,7 @@
           pkgs = nixpkgsFor.${system};
 
         in {
-          inherit (pkgs) offen offen-auditorium offen-packages offen-script offen-vault;
+          inherit (pkgs) license_finder offen offen-auditorium offen-packages offen-script offen-vault;
         }
       );
 
