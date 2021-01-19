@@ -1,5 +1,6 @@
 { buildGoModule
 , offen-auditorium
+, offen-script
 , offen-vault
 , runCommand
 , statik
@@ -18,6 +19,8 @@ let
     chmod -R +w $out/public
     cp -r ${src}/NOTICE $out/public/NOTICE.txt
     cp -r ${offen-auditorium}/dist/* $out/public/
+    chmod -R +w $out/public
+    cp -r ${offen-script}/dist/* $out/public/
     chmod -R +w $out/public
     cp -r ${offen-vault}/dist/* $out/public/
   '';
