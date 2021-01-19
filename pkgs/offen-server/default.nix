@@ -1,5 +1,13 @@
-{ runCommand, buildGoModule, offen-auditorium, offen-vault, statik }:
-{ src, version }:
+{ buildGoModule
+, offen-auditorium
+, offen-vault
+, runCommand
+, statik
+}:
+
+{ src
+, version
+}:
 
 let
   wrappedSrc = runCommand "offen-server-wrapped-src" {} ''
@@ -8,6 +16,7 @@ let
     chmod -R +w $out/public
     cp -r ${src}/locales/* $out/public/
     chmod -R +w $out/public
+    cp -r ${src}/NOTICE $out/public/NOTICE.txt
     cp -r ${offen-auditorium}/dist/* $out/public/
     chmod -R +w $out/public
     cp -r ${offen-vault}/dist/* $out/public/
