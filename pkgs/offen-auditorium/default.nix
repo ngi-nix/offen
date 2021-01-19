@@ -52,6 +52,5 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/
     cp -r dist $out/dist
-    cp dependencies.csv $out/
   '';
 }
